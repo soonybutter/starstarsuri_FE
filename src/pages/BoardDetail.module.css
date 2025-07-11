@@ -1,0 +1,117 @@
+.detailContainer {
+  position: relative; 
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 40px;
+  box-shadow: 0 5px 20px rgba(158, 158, 158, 0.08);
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+p {
+  margin: 15px 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.content {
+  padding-top:5px;
+  white-space: pre-wrap;
+  background-color: #fff;
+  padding: 16px;
+  height:100px;
+  margin-top:10px;
+  border-top: 1.3px solid #ffe1ef;
+  
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 40px;
+  gap: 10px;
+}
+
+.editButton,
+.deleteButton {
+  padding: 5px 16px;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.editButton {
+  background-color: #daeeff;
+  color: #333;
+}
+
+.editButton:hover {
+  background-color: #a3d0f5;
+}
+
+.deleteButton {
+  background-color: #f9f0fa;
+  color: #333;
+}
+
+.deleteButton:hover {
+  background-color: #ce9fd6;
+}
+
+.backButtonWrapper {
+  display: flex;
+  justify-content: right; 
+  margin-top: 70px;
+  padding-right:200px;
+  
+}
+
+.backButton {
+  background-color: #faeef0;
+  color: #333;
+  border-radius: 14px;
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s;
+}
+
+.backButton:hover {
+  background-color: #ffbaba;
+}
+
+.buttonRow {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  flex-wrap: wrap; 
+}
+
+.passwordInput {
+  padding: 5px 16px;
+  margin-top: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: inherit;
+  background-color: #f9f9f9;
+  transition: border-color 0.2s;
+}
+
+.passwordInput:focus {
+  outline: none;
+  border-color: #5b57ff;
+  background-color: #fff;
+}

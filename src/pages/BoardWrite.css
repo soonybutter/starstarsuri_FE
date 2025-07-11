@@ -1,0 +1,112 @@
+.board-write {
+  max-width: 640px;
+  margin: 40px auto;
+  padding: 32px 36px;
+  background-color: #ffffff;
+  border: 1px solid #ffdcf7;
+  border-radius: 12px;
+  font-family: "Pretendard", sans-serif;
+  box-shadow: 0 6px 16px rgba(255, 235, 244, 0.05);
+}
+
+.board-write h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.board-write form > div {
+  margin-bottom: 16px;
+}
+
+.board-write label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #555;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.board-write input,
+.board-write textarea {
+  width: 100%;
+  padding: 12px 0.5px;
+  font-size: 15px;
+  font-family: inherit;
+  font-weight: 500;
+  color: #333;
+  background-color: #f9f9f9;
+  border: 1px solid #fae0e0;
+  border-radius: 10px;
+  transition: 
+    border-color 0.2s ease-in-out,
+    background-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+  padding-left:10px;
+
+}
+
+.board-write input:hover,
+.board-write textarea:hover {
+  border-color: #d2d1d1;
+  background-color: #fff;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
+}
+
+.board-write input:focus,
+.board-write textarea:focus {
+  outline: none;
+  border-color: #ffdffc;
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(251, 221, 255, 0.815);
+}
+
+.board-write textarea {
+  min-height: 180px;
+  resize: none;
+  line-height: 1.5;
+}
+
+.board-write input[type="password"] {
+  margin-top: 8px;
+}
+
+.board-write button {
+  margin-top: 20px;
+  padding: 8px 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: 0.2s ease-in-out;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.board-write button.submit {
+  background-color: #daeeff;
+  color: #333;
+}
+
+.board-write button.submit:hover {
+  background-color: #a3d0f5;
+}
+
+.board-write button.cancel {
+  background-color: #f9f0fa;
+  color: #333;
+  margin-left: 10px;
+}
+
+.board-write button.cancel:hover {
+  background-color: #ce9fd6;
+}
+
+.board-write .button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
