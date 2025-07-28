@@ -9,9 +9,18 @@ const BoardPage =()=>{
     const navigate = useNavigate();
 
     useEffect(()=>{
+        console.log("useEffect 실행됨.");
         fetchPosts()
-        .then((res)=> setPosts(res.data))
-        .catch((err)=> console.log("error 발생!"));
+        .then((res)=> {
+            console.log("응답 데이터 확인: ", res.data);
+            if (Array.isArray(res.data)) {
+            setPosts(res.data);
+            } else {
+                console.error("응답 데이터가 배열이 아닙니다!", res.data);
+                setPosts([]);
+            }
+        })
+        .catch((err)=> console.log("error 발생!",err));
     },[]);
 
     const handleDelete = (id) =>{
@@ -32,15 +41,19 @@ const BoardPage =()=>{
             <button className={styles.writeButton} onClick={()=>navigate("/BoardWrite")}>문의 작성하기</button>
 
             <ul className={styles.postList}>
-
-            {posts.map((post)=>(
-                <li key={post.id} className={styles.postItem}>
-                    <div onClick={() => navigate(`/BoardDetail/${post.id}`)} className={styles.postContent}>
-                        <span className={styles.postTitle}>✉{'\u00A0'}{'\u00A0'} {post.title}</span>
-                        <span className={styles.postWriter}>작성자 : {post.writer}</span>
-                    </div>
-                </li>
-            ))}
+        
+            {Array.isArray(posts) ? (
+                posts.map((post) => (
+                    <li key={post.id} className={styles.postItem}>
+                        <div onClick={() => navigate(`/BoardDetail/${post.id}`)} className={styles.postContent}>
+                            <span className={styles.postTitle}>✉{'\u00A0'}{'\u00A0'} {post.title}</span>
+                            <span className={styles.postWriter}>작성자 : {post.writer}</span>
+                        </div>
+                    </li>
+                ))
+            ) : (
+                <li>게시글이 없습니다.</li>
+            )}
 
             </ul> 
 

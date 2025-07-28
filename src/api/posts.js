@@ -1,11 +1,10 @@
 import axios from "axios";
 
 // Nginx가 /api 요청을 Spring Boot로 프록시
-const API_BASE_URL = "http://localhost:8080/api/inquiries";
-
 const api = axios.create({
-  baseURL: API_BASE_URL
+  baseURL: import.meta.env.VITE_API_URL
 });
+
 
 export const fetchPosts = () => api.get("");
 export const fetchPostById = (id) => api.get(`/${id}`);

@@ -23,7 +23,7 @@ const BoardWrite = ()=>{
     const handleSubmit = (e)=>{
         e.preventDefault();
 
-        axios.post("http://localhost:8080/api/inquiries", form)
+        axios.post("/api/inquiries", form)
         .then((res) => {
             alert("문의가 등록되었습니다.");
             navigate("/BoardPage");
