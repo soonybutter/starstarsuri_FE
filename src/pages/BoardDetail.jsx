@@ -76,44 +76,68 @@ const BoardDetail = () => {
   if (!post) return <p>로딩 중...</p>;
 
   return (
-    <div>
-    <div className={styles.detailContainer}>
-      <h2>{post.title}</h2>
-      <p>
-        <strong>작성자</strong> {'\u00A0'}{post.writer}
-          <span style={{ marginLeft: "520px", color: "#888", fontSize: "0.9rem"}}>
-            {new Date(post.createdAt).toLocaleString("ko-KR", {
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-              hour: "2-digit",
-              minute: "2-digit"
-            })}
-          </span>
-      </p>
-      <p className={styles.content}>{post.content}</p>
-
-      <div className={styles.buttonRow}>
-        <input
-          type="password"
-          name="password"
-          placeholder="비밀번호를 입력해주세요."
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className={styles.passwordInput}
-          required
-        />
-        <div className={styles.buttonGroup}>
-          <button type="button" onClick={handleEdit} className={styles.editButton}>수정</button>
-          <button type="button" onClick={handleDelete} className={styles.deleteButton}>삭제</button>
-        </div>
+  <div className={styles.detailContainer}>
+    {/* 헤더: 제목 + 메타정보 */}
+    <div className={styles.header}>
+      <h2 className={styles.title}>{post.title}</h2>
+      <div className={styles.meta}>
+        <span className={styles.writer}>{post.writer}</span>
+        <span className={styles.date}>
+          {new Date(post.createdAt).toLocaleString("ko-KR", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+        </span>
       </div>
     </div>
+
+    {/* 본문 내용 */}
+    <p className={styles.content}>{post.content}</p>
+
+    {/* 비밀번호 입력 + 수정/삭제 버튼 */}
+    <div className={styles.buttonRow}>
+      <input
+        type="password"
+        name="password"
+        placeholder="비밀번호를 입력해주세요."
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className={styles.passwordInput}
+        required
+      />
+      <div className={styles.buttonGroup}>
+        <button
+          type="button"
+          onClick={handleEdit}
+          className={styles.editButton}
+        >
+          수정
+        </button>
+        <button
+          type="button"
+          onClick={handleDelete}
+          className={styles.deleteButton}
+        >
+          삭제
+        </button>
+      </div>
+    </div>
+
+    {/* 뒤로가기 */}
     <div className={styles.backButtonWrapper}>
-      <button onClick={() => navigate(-1)} className={styles.backButton}>뒤로가기</button>
+      <button
+        type="button"
+        onClick={() => navigate(-1)}
+        className={styles.backButton}
+      >
+        뒤로가기
+      </button>
     </div>
   </div>
-  );
+);
 };
 
 export default BoardDetail;

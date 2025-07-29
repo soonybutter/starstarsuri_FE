@@ -7,6 +7,7 @@
   border-radius: 12px;
   font-family: "Pretendard", sans-serif;
   box-shadow: 0 6px 16px rgba(255, 235, 244, 0.05);
+  box-sizing: border-box;
 }
 
 .board-write h2 {
@@ -32,7 +33,8 @@
 .board-write input,
 .board-write textarea {
   width: 100%;
-  padding: 12px 0.5px;
+  box-sizing: border-box;
+  padding: 12px 10px;
   font-size: 15px;
   font-family: inherit;
   font-weight: 500;
@@ -40,19 +42,16 @@
   background-color: #f9f9f9;
   border: 1px solid #fae0e0;
   border-radius: 10px;
-  transition: 
+  transition:
     border-color 0.2s ease-in-out,
     background-color 0.2s ease-in-out,
-    box-shadow 0.2s ease-in-out;
-  padding-left:10px;
-
+    box-shadow 0 0 6px rgba(0, 0, 0, 0.06);
 }
 
 .board-write input:hover,
 .board-write textarea:hover {
   border-color: #d2d1d1;
   background-color: #fff;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
 }
 
 .board-write input:focus,
@@ -73,15 +72,22 @@
   margin-top: 8px;
 }
 
+.board-write .button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
 .board-write button {
-  margin-top: 20px;
   padding: 8px 20px;
   font-weight: bold;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   font-family: inherit;
-  transition: 0.2s ease-in-out;
+  transition: background-color 0.2s, transform 0.2s;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -89,24 +95,74 @@
   background-color: #daeeff;
   color: #333;
 }
-
 .board-write button.submit:hover {
   background-color: #a3d0f5;
+  transform: translateY(-1px);
 }
 
 .board-write button.cancel {
   background-color: #f9f0fa;
   color: #333;
-  margin-left: 10px;
 }
-
 .board-write button.cancel:hover {
   background-color: #ce9fd6;
+  transform: translateY(-1px);
 }
 
-.board-write .button-group {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 16px;
+/* 반응형 미디어 쿼리 */
+/* 태블릿 이하 (max-width: 768px) */
+@media (max-width: 768px) {
+  .board-write {
+    padding: 24px 30px;
+    margin: 32px 20px;
+  }
+  .board-write h2 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+  .board-write label {
+    font-size: 14px;
+  }
+  .board-write input,
+  .board-write textarea {
+    font-size: 14px;
+    padding: 10px 8px;
+  }
+  .board-write .button-group {
+    gap: 8px;
+  }
+  .board-write button {
+    padding: 7px 18px;
+    font-size: 0.95rem;
+  }
+}
+
+/* 모바일 이하 (max-width: 480px) */
+@media (max-width: 480px) {
+  .board-write {
+    padding: 16px 20px;
+    margin: 20px 10px;
+  }
+  .board-write h2 {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+  }
+  .board-write label {
+    font-size: 13px;
+  }
+  .board-write input,
+  .board-write textarea {
+    font-size: 13px;
+    padding: 8px 6px;
+  }
+  .board-write .button-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .board-write button {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 0.95rem;
+  }
 }

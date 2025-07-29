@@ -1,15 +1,23 @@
+.pageContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 50px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
 .title {
   font-size: 2rem;
   text-align: center;
-  margin-bottom: 2rem;
+  margin: 0;
   color: #444;
   font-family: 'Noto Sans KR', sans-serif;
-  padding-top:50px;
 }
 
 .writeButton {
-  display: block;
-  margin: 0 auto 2rem auto;
+  align-self: center;
   padding: 7px 13px;
   background-color: #faeef0;
   color: rgb(138, 137, 137);
@@ -23,7 +31,7 @@
 
 .writeButton:hover {
   background-color: #ff9aad;
-  color:white;
+  color: white;
   transform: translateY(-2px);
 }
 
@@ -31,21 +39,20 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  max-width: 800px;  
+  width: 100%;
+  list-style: none;
+  padding: 0;
   margin: 0 auto;
-  align-items: center; 
 }
 
 .postItem {
   background-color: #ffffff;
   padding: 16px;
   border-radius: 10px;
-  width: 100%; 
-  max-width: 800px; 
+  width: 100%;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
   transition: all 0.2s ease;
-  list-style: none;
+  cursor: pointer;
 }
 
 .postItem:hover {
@@ -57,6 +64,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 
 .postTitle {
@@ -65,28 +73,61 @@
   color: #333;
 }
 
-.postTitle > span{
-  padding-left:40px;
-}
-
 .postWriter {
   font-size: 0.95rem;
   color: #888;
   font-weight: 500;
-  padding-right:50px;
 }
 
-.deleteButton {
-  background-color: #E0BBE4;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 12px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+/* 반응형 미디어 쿼리 */
+/* 태블릿 이하 (max-width: 768px) */
+@media (max-width: 768px) {
+  .pageContainer {
+    padding: 40px 16px;
+    gap: 24px;
+  }
+  .title {
+    font-size: 1.7rem;
+  }
+  .writeButton {
+    padding: 6px 12px;
+  }
+  .postList {
+    gap: 12px;
+  }
+  .postItem {
+    padding: 14px;
+  }
+  .postContent {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .postWriter {
+    font-size: 0.9rem;
+  }
 }
 
-.deleteButton:hover {
-  background-color: #d1a9dd;
+/* 모바일 이하 (max-width: 480px) */
+@media (max-width: 480px) {
+  .pageContainer {
+    padding: 24px 12px;
+    gap: 20px;
+  }
+  .title {
+    font-size: 1.4rem;
+  }
+  .writeButton {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  .postItem {
+    padding: 12px;
+  }
+  .postTitle {
+    font-size: 1rem;
+  }
+  .postWriter {
+    font-size: 0.85rem;
+  }
 }

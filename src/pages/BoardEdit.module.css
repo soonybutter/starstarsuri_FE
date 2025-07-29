@@ -6,6 +6,15 @@
   border: 1px solid #e2e2e2;
   border-radius: 12px;
   font-family: "Pretendard", sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.editContainer > h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin: 0;
 }
 
 .meta {
@@ -22,6 +31,8 @@
 
 .input,
 .textarea {
+  width: 100%;
+  box-sizing: border-box;
   padding: 12px 14px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -29,17 +40,20 @@
   font-family: inherit;
   color: #333;
   background-color: #f9f9f9;
-  transition: border-color 0.2s ease;
-  
+  transition:
+    border-color 0.2s ease-in-out,
+    background-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
 }
 
-
+.input:hover,
 .textarea:hover {
   border-color: #999;
   background-color: #fff;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
 }
 
+.input:focus,
 .textarea:focus {
   outline: none;
   border-color: #ffdffc;
@@ -47,40 +61,17 @@
   box-shadow: 0 0 8px rgba(251, 221, 255, 0.815);
 }
 
-.input:focus{
-  outline: none;
-  border-color: #ffdffc;
-  background-color: #fff;
-  box-shadow: 0 0 8px rgba(251, 221, 255, 0.815);
-}
-
-.input:hover {
-  border-color: #999;
-  background-color: #fff;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
-}
-
 .textarea {
   min-height: 180px;
-  resize: none; 
+  resize: none;
   line-height: 1.5;
-  padding: 12px 14px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font-size: 15px;
-  font-family: inherit;
-  color: #333;
-  background-color: #f9f9f9;
-  transition: 
-    border-color 0.2s ease-in-out,
-    background-color 0.2s ease-in-out,
-    box-shadow 0.2s ease-in-out;
 }
 
 .buttons {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  flex-wrap: wrap;
   margin-top: 8px;
 }
 
@@ -91,7 +82,7 @@
   border: none;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.2s;
+  transition: background-color 0.2s;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -99,16 +90,76 @@
   background-color: #daeeff;
   color: #333;
 }
-
 .submitButton:hover {
   background-color: #a3d0f5;
 }
 
 .cancelButton {
-   background-color: #f9f0fa;
+  background-color: #f9f0fa;
   color: #333;
 }
-
 .cancelButton:hover {
-   background-color: #ce9fd6;
+  background-color: #ce9fd6;
+}
+
+/* 반응형 미디어 쿼리 */
+
+/* 태블릿 이하 (max-width: 768px) */
+@media (max-width: 768px) {
+  .editContainer {
+    padding: 24px;
+    gap: 20px;
+  }
+  .editContainer > h2 {
+    font-size: 1.6rem;
+  }
+  .meta {
+    font-size: 13px;
+  }
+  .input,
+  .textarea {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+  .buttons {
+    gap: 8px;
+  }
+  .submitButton,
+  .cancelButton {
+    padding: 8px 14px;
+  }
+}
+
+/* 모바일 이하 (max-width: 480px) */
+@media (max-width: 480px) {
+  .editContainer {
+    padding: 16px;
+    margin: 20px 10px;
+    gap: 16px;
+  }
+  .editContainer > h2 {
+    font-size: 1.4rem;
+  }
+  .meta {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+  .form {
+    gap: 12px;
+  }
+  .input,
+  .textarea {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+  .buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .submitButton,
+  .cancelButton {
+    width: 100%;
+    padding: 10px 0;
+  }
 }

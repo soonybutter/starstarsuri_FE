@@ -1,0 +1,29 @@
+@media (max-width: 768px) {
+  .intro_bg { height: 60vh; }
+  .nav { gap: 5%; }
+  .intro_text > h1 { font-size: 3rem; }
+  .intro_text > h5 { font-size: 1rem; }
+  .amount { margin-top: -4vh; gap: 4%; }
+  .main_text0 > h1,
+  .main_text1 > h1,
+  .main_text2 > h1 { font-size: 2rem; }
+  .icons { gap: 4%; }
+  .service img { max-width: 280px; }
+  .inquiry_button { padding: 0.6rem 1.5rem; font-size: 0.9rem; }
+}
+
+@media (max-width: 480px) {
+  .intro_bg { height: 50vh; }
+  .nav { flex-wrap: wrap; gap: 2%; font-size: 0.8rem; }
+  .intro_text > h1 { font-size: 2rem; }
+  .intro_text > h5 { font-size: 0.85rem; }
+  .amount { flex-direction: column; margin-top: -3vh; gap: 2%; }
+  .main_text0,
+  .main_text1,
+  .main_text2 { padding: 4vh 0; }
+  .icons { grid-template-columns: 1fr; gap: 3%; }
+  .service { flex-direction: column; gap: 3%; }
+  .service img { width: 100%; }
+  .inquiry_button { width: 100%; }
+  footer { font-size: 0.8rem; padding: 2rem 1rem; }
+}

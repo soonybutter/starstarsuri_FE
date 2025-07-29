@@ -35,7 +35,7 @@ const BoardPage =()=>{
 
 
     return(
-        <div>
+        <div className={styles.pageContainer}>
             <h1 className={styles.title}>상담 및 문의  ·  CS </h1>
 
             <button className={styles.writeButton} onClick={()=>navigate("/BoardWrite")}>문의 작성하기</button>

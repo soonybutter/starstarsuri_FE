@@ -43,7 +43,7 @@ const BoardEdit = () => {
   try {
     await updatePost(id, formData);
     alert("게시글이 수정되었습니다.");
-    navigate(`/BoardDetail/${id}`, { replace: true });  // 문자열로 감싸야 합니다!
+    navigate(`/BoardDetail/${id}`, { replace: true }); 
   } catch (error) {
     console.error("수정 실패:", error);
     alert("수정에 실패했습니다.");
