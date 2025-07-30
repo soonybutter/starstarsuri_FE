@@ -140,29 +140,36 @@
 /* 모바일 이하 (max-width: 480px) */
 @media (max-width: 480px) {
   .board-write {
-    padding: 16px 20px;
-    margin: 20px 10px;
+    padding: 12px 3vw;
+    margin: 10px 0;
+    max-width: 100vw;
+    box-sizing: border-box;
   }
   .board-write h2 {
-    font-size: 1.4rem;
-    margin-bottom: 16px;
+    font-size: 1.2rem;
+    margin-bottom: 14px;
   }
   .board-write label {
-    font-size: 13px;
+    font-size: 12px;
+    margin-bottom: 4px;
   }
   .board-write input,
   .board-write textarea {
-    font-size: 13px;
-    padding: 8px 6px;
+    font-size: 16px;       
+    padding: 10px 7px;
+    margin-bottom: 8px;
   }
   .board-write .button-group {
     flex-direction: column;
     align-items: stretch;
-    gap: 12px;
+    gap: 8px;
+    margin-top: 14px;
   }
   .board-write button {
     width: 100%;
-    padding: 10px 0;
-    font-size: 0.95rem;
+    padding: 13px 0;
+    font-size: 1rem;
+    margin: 0;
+    border-radius: 8px;
   }
 }

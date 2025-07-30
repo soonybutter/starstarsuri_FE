@@ -42,11 +42,11 @@ const BoardWrite = ()=>{
       <form onSubmit={handleSubmit}>
         <div>
           <label>제목</label><br />
-          <input type="text" name="title" value={form.title} onChange={handleChange} required />
+          <input type="text" name="title" placeholder="제목을 입력하세요" value={form.title} onChange={handleChange} required />
         </div>
         <div>
           <label>작성자</label><br />
-          <input type="text" name="writer" value={form.writer} onChange={handleChange} required />
+          <input type="text" name="writer"  placeholder="이름" value={form.writer} onChange={handleChange} required />
         </div>
         <div>
           <label>내용</label><br />
