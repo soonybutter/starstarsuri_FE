@@ -77,7 +77,7 @@ const BoardDetail = () => {
 
   return (
   <div className={styles.detailContainer}>
-    {/* 헤더: 제목 + 메타정보 */}
+    
     <div className={styles.header}>
       <h2 className={styles.title}>{post.title}</h2>
       <div className={styles.meta}>
@@ -94,10 +94,8 @@ const BoardDetail = () => {
       </div>
     </div>
 
-    {/* 본문 내용 */}
     <p className={styles.content}>{post.content}</p>
-
-    {/* 비밀번호 입력 + 수정/삭제 버튼 */}
+    
     <div className={styles.buttonRow}>
       <input
         type="password"
@@ -126,7 +124,6 @@ const BoardDetail = () => {
       </div>
     </div>
 
-    {/* 뒤로가기 */}
     <div className={styles.backButtonWrapper}>
       <button
         type="button"

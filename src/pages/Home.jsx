@@ -21,7 +21,6 @@ const Home =()=>{
     useEffect(()=>{
     
         const sections = document.querySelectorAll(".section");
-        
     
         const handleScroll = () => {
         sections.forEach((section) => {
@@ -35,14 +34,12 @@ const Home =()=>{
           }
           });
         };
-
        
         const introH1 = document.querySelector(".intro_text > h1");
         if (introH1) {
           
           introH1.classList.add("show");
         }
-    
     
         window.addEventListener("scroll", handleScroll);
         handleScroll();
@@ -51,20 +48,18 @@ const Home =()=>{
           window.removeEventListener("scroll", handleScroll);
         }
     },[]);
-    
-
 
     return (
-    <div className="wrap">
-      <div className="intro_bg">
-        <header className="header" id="link_header">
-          <ul className="nav">
-            <li><a href="#link_header">HOME</a></li>
-            <li><a href="#link_about">ABOUT</a></li>
-            <li><a href="#link_service">SERVICE</a></li>
-            <li><a href="#link_customer_service">CONTACT</a></li>
-          </ul>
-        </header>
+      <div className="wrap">
+        <div className="intro_bg">
+          <header className="header" id="link_header">
+            <ul className="nav">
+              <li><a href="#link_header">HOME</a></li>
+              <li><a href="#link_about">ABOUT</a></li>
+              <li><a href="#link_service">SERVICE</a></li>
+              <li><a href="#link_customer_service">CONTACT</a></li>
+            </ul>
+          </header>
 
         <div className="intro_text" id="link_header">
           <h1>별별 집수리</h1>
@@ -78,30 +73,30 @@ const Home =()=>{
       <ul className="amount">
         <li>
           <div className="content1"
-               onClick={()=>{
+                onClick={()=>{
                 window.open("https://www.daangn.com/kr/local-profile/%EB%B3%84%EB%B3%84-%EC%A7%91%EC%88%98%EB%A6%AC-ntixjet9u48x/?in=%EC%84%9C%EC%8B%A0%EB%8F%99-2499","_blank")
-               }}>당근마켓 ‘별별집수리’</div>
+                }}>당근마켓 ‘별별집수리’</div>
         </li>
         <li>
           <div className="content1"
-               onClick={()=>{
+                onClick={()=>{
                 window.open("https://blog.naver.com/starstar1999","_blank")
-               }}>네이버 블로그 ‘별별집수리’</div>
+                }}>네이버 블로그 ‘별별집수리’</div>
         </li>
         <li>
           <div className="content1"
-               onClick={()=>{
+                onClick={()=>{
                 navigate("/BoardPage");
-               }}>문의게시판</div>
+                }}>문의게시판</div>
         </li>
         <li>
           <div className="content1"
-               onClick={()=>{
+                onClick={()=>{
                 const element = document.getElementById("link_customer_service");
                 if(element){
                   element.scrollIntoView({behavior: "smooth"});   
                 }
-               }} >상담 및 문의 </div>
+                }} >상담 및 문의 </div>
         </li>
       </ul>
 
@@ -155,9 +150,9 @@ const Home =()=>{
           <li>
             <div className="main_text2_title"><h1>CUSTOMER SERVICE </h1></div>
             <div className="inquiry_button"
-                 onClick={()=>{
+                  onClick={()=>{
                   navigate("/BoardPage");
-                 }}>견적 및 상담 문의</div>
+                  }}>견적 및 상담 문의</div>
           </li>
         </ul>
       </section>

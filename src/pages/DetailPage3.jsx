@@ -61,7 +61,6 @@ const DetailPage3 =()=>{
                 })}
             </div>
 
-            {/* 모달 */}
             {modalImg &&(
                 <div className="modal-overlay" onClick={closeModal}>
                     <div className="modal-content" onClick={(e)=> e.stopPropagation()}>

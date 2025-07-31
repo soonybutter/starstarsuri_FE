@@ -35,7 +35,6 @@ const BoardWrite = ()=>{
 
     };
 
-
     return (
     <div className="board-write">
       <h2>상담/문의 작성하기</h2>
