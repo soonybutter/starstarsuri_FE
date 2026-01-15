@@ -1,9 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState  } from "react";
+import { getMe, logout } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
+import api from "../api/posts";
 
 const Home =()=>{
     const navigate = useNavigate();
+    const [me, setMe] = useState(null);
+    const [loadingMe, setLoadingMe] = useState(true);
 
     const handleMoreClick = (idx)=>{
         if(idx === 0){
@@ -18,28 +22,64 @@ const Home =()=>{
         
     };
 
+     // 로그인 상태 확인
+    const checkMe = async () => {
+      setLoadingMe(true);
+      try {
+        const res = await getMe();
+        setMe(res.data);
+      } catch (e) {
+        if (e?.response?.status === 401) {
+          setMe(null);
+        } else {
+          console.error(e);
+          setMe(null);
+        }
+      } finally {
+        setLoadingMe(false);
+      }
+    };
+
+    const base = import.meta.env.VITE_API_BASE || "http://localhost:8080";
+
+    // 카카오 로그인 시작 (백엔드로 보내서 OAuth 시작)
+    const startKakaoLogin = () => {
+      const base = import.meta.env.VITE_API_BASE || "http://localhost:8080";
+      window.location.href = `${base}/oauth2/authorization/kakao`;
+    };
+
+    const handleLogout = async () => {
+      try {
+          await logout();
+        } catch (e) {
+          console.error(e);
+        } finally {
+          setMe(null);
+          // 혹시 세션 반영이 느리면 한 번 더 확인
+          checkMe();
+      }
+    };
+
+
     useEffect(()=>{
     
+        checkMe();
+
         const sections = document.querySelectorAll(".section");
     
         const handleScroll = () => {
-        sections.forEach((section) => {
-          const rect = section.getBoundingClientRect();
-          const inView = rect.top < window.innerHeight - 100 && rect.bottom > 100;
-    
-          if (inView) {
-            section.classList.add("show");
-          } else {
-            section.classList.remove("show");
-          }
-          });
+          sections.forEach((section) => {
+            const rect = section.getBoundingClientRect();
+            const inView = rect.top < window.innerHeight - 100 && rect.bottom > 100;
+      
+            section.classList.toggle("show", inView);
+
+            });
         };
        
         const introH1 = document.querySelector(".intro_text > h1");
-        if (introH1) {
-          
-          introH1.classList.add("show");
-        }
+        
+        introH1?.classList.add("show");
     
         window.addEventListener("scroll", handleScroll);
         handleScroll();
@@ -59,7 +99,43 @@ const Home =()=>{
               <li><a href="#link_service">SERVICE</a></li>
               <li><a href="#link_customer_service">CONTACT</a></li>
             </ul>
+            {/* 로그인 영역 */}
+
+            <div className="authBox">
+
+              {me?.isAdmin && (
+              <button
+                className="authBtn authBtnGhost"
+                onClick={() => navigate("/AdminInquiries")}
+              >
+                문의 관리
+              </button>
+            )}
+              {loadingMe ? (
+                <div className="authSkeleton" />
+              ) : me ? (
+                <div className="authLoggedIn">
+                  <div className="authProfile">
+                    <div className="authAvatar">
+                      {(me.nickname ?? me.username ?? "U").slice(0, 1)}
+                    </div>
+                    <span className="authName">{me.nickname ?? me.username}님</span>
+                  </div>
+
+                  <button className="authBtn authBtnGhost" onClick={handleLogout}>
+                    로그아웃
+                  </button>
+                </div>
+              ) : (
+                <button className="authBtn authBtnKakao" onClick={startKakaoLogin}>
+                  카카오로 시작하기
+                </button>
+              )}
+            </div>
+            
+            
           </header>
+          
 
         <div className="intro_text" id="link_header">
           <h1>별별 집수리</h1>
@@ -162,7 +238,7 @@ const Home =()=>{
           CEO. 조 현 성 <br />
           Addr. 전북 김제시 서암동 <br />
           Tel. 000 - 0000 -0000 <br />
-          COPYRIGHT 2024. SOON & JUNE. ALL RIGHT RESERVED.
+          COPYRIGHT 2026. SOON & JUNE. ALL RIGHT RESERVED.
         </div>
       </footer>
     </div>

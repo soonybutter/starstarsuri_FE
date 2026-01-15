@@ -1,50 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { fetchPostById, deletePost } from "../api/posts";
+import { getMe } from "../api/auth";
 import styles from "./BoardDetail.module.css";
 
 const BoardDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+
   const [post, setPost] = useState(null);
-  const [password, setPassword] = useState("");
+  const [me, setMe] = useState(null);
+  const [loadingMe, setLoadingMe] = useState(true);
 
   useEffect(() => {
     fetchPostById(id)
       .then((res) => setPost(res.data))
       .catch((err) => {
-        console.error("조회 실패:", err);
-        navigate("/BoardPage");
+        const status = err?.response?.status;
+        if (status === 401) {
+          alert("로그인 후 글을 확인할 수 있어요.");
+          navigate("/");
+        } else {
+          console.error("조회 실패:", err);
+          navigate("/BoardPage");
+        }
       });
-  }, [id]);
+  }, [id, navigate]);
 
-  // 비밀번호 검증 함수
-  const checkPassword = async () => {
-    try {
-      const res = await axios.post(`/api/inquiries/${id}/check-password`, {
-      password: password,
-      });
-      return res.data === true;
-    } catch (err) {
-      console.error("비밀번호 확인 중 오류:", err);
-      alert("비밀번호 확인 중 서버 오류가 발생했습니다.");
-      return false;
-    }
-  };
+  useEffect(() => {
+    setLoadingMe(true);
+    getMe()
+      .then((res) => setMe(res.data))
+      .catch(() => setMe(null))
+      .finally(() => setLoadingMe(false));
+  }, []);
 
-  // 삭제
+  const isOwner = useMemo(() => {
+    if (!me || !post) return false;
+    return String(me.id) === String(post.authorId);
+  }, [me, post]);
+
   const handleDelete = async () => {
-    if (!password) {
-      alert("비밀번호를 입력해주세요.");
-      return;
-    }
-
-    const isMatch = await checkPassword();
-    if (!isMatch) {
-      alert("비밀번호가 일치하지 않습니다.");
-      return;
-    }
+    if (!me) return alert("로그인 후 이용할 수 있어요.");
+    if (!isOwner) return alert("본인이 작성한 글만 삭제할 수 있어요.");
 
     if (window.confirm("정말 삭제하시겠습니까?")) {
       try {
@@ -52,89 +50,94 @@ const BoardDetail = () => {
         alert("삭제되었습니다.");
         navigate("/BoardPage");
       } catch (err) {
-        console.error("삭제 실패:", err);
-        alert("삭제에 실패했습니다.");
+        const status = err?.response?.status;
+        if (status === 401) alert("로그인이 필요해요.");
+        else if (status === 403) alert(err?.response?.data?.message ?? "권한이 없어요.");
+        else alert("삭제에 실패했습니다.");
       }
     }
   };
 
-  // 수정
-  const handleEdit = async () => {
-  if (!password) {
-    alert("비밀번호를 입력해주세요.");
-    return;
-  }
+  const handleEdit = () => {
+    if (!me) return alert("로그인 후 이용할 수 있어요.");
+    if (!isOwner) return alert("본인이 작성한 글만 수정할 수 있어요.");
+    navigate(`/edit/${id}`);
+  };
 
-  const isMatch = await checkPassword();
-  if (isMatch) {
-    navigate(`/edit/${id}`);  
-  } else {
-    alert("비밀번호가 일치하지 않습니다.");
-  }
-};
+  if (!post) return <div className={styles.page}>로딩 중...</div>;
 
-  if (!post) return <p>로딩 중...</p>;
+  const hasReply = !!post.reply?.trim();
 
   return (
-  <div className={styles.detailContainer}>
-    
-    <div className={styles.header}>
-      <h2 className={styles.title}>{post.title}</h2>
-      <div className={styles.meta}>
-        <span className={styles.writer}>{post.writer}</span>
-        <span className={styles.date}>
-          {new Date(post.createdAt).toLocaleString("ko-KR", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-          })}
-        </span>
-      </div>
-    </div>
-
-    <p className={styles.content}>{post.content}</p>
-    
-    <div className={styles.buttonRow}>
-      <input
-        type="password"
-        name="password"
-        placeholder="비밀번호를 입력해주세요."
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className={styles.passwordInput}
-        required
-      />
-      <div className={styles.buttonGroup}>
-        <button
-          type="button"
-          onClick={handleEdit}
-          className={styles.editButton}
-        >
-          수정
-        </button>
-        <button
-          type="button"
-          onClick={handleDelete}
-          className={styles.deleteButton}
-        >
-          삭제
+    <div className={styles.page}>
+      <div className={styles.topBar}>
+        <h1 className={styles.pageTitle}>문의 상세</h1>
+        <button type="button" className={styles.backBtn} onClick={() => navigate(-1)}>
+          뒤로
         </button>
       </div>
-    </div>
 
-    <div className={styles.backButtonWrapper}>
-      <button
-        type="button"
-        onClick={() => navigate(-1)}
-        className={styles.backButton}
-      >
-        뒤로가기
-      </button>
+      <section className={styles.card}>
+        <div className={styles.cardHeader}>
+          <div className={styles.headLeft}>
+            <h2 className={styles.title}>{post.title}</h2>
+            <span className={`${styles.chip} ${hasReply ? styles.chipDone : styles.chipTodo}`}>
+              {hasReply ? "답변완료" : "미답변"}
+            </span>
+          </div>
+
+          <div className={styles.meta}>
+            <span className={styles.writer}>{post.writer}</span>
+            <span className={styles.dot}>·</span>
+            <span className={styles.date}>
+              {new Date(post.createdAt).toLocaleString("ko-KR", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </span>
+          </div>
+        </div>
+
+        <div className={styles.contentBox}>{post.content}</div>
+
+        {/* owner일 때만 수정/삭제 */}
+        {!loadingMe && isOwner && (
+          <div className={styles.actions}>
+            <button type="button" onClick={handleEdit} className={styles.editBtn}>
+              수정
+            </button>
+            <button type="button" onClick={handleDelete} className={styles.deleteBtn}>
+              삭제
+            </button>
+          </div>
+        )}
+
+        {!loadingMe && me && !isOwner && (
+          <p className={styles.hint}>* 본인이 작성한 글만 수정/삭제할 수 있어요.</p>
+        )}
+
+        {/* 답변 영역 */}
+        {hasReply ? (
+          <div className={styles.replyBox}>
+            <div className={styles.replyHeader}>
+              <h3 className={styles.replyTitle}>사장 답변</h3>
+              {post.repliedAt && (
+                <span className={styles.replyTime}>
+                  {new Date(post.repliedAt).toLocaleString("ko-KR")}
+                </span>
+              )}
+            </div>
+            <p className={styles.replyContent}>{post.reply}</p>
+          </div>
+        ) : (
+          <div className={styles.replyEmptyBox}>* 아직 답변이 등록되지 않았습니다.</div>
+        )}
+      </section>
     </div>
-  </div>
-);
+  );
 };
 
 export default BoardDetail;

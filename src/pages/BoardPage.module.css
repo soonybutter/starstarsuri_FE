@@ -19,18 +19,16 @@
 .writeButton {
   align-self: center;
   padding: 7px 13px;
-  background-color: #faeef0;
-  color: rgb(138, 137, 137);
   border: none;
   border-radius: 10px;
   font-weight: bold;
-  box-shadow: 0 4px 8px rgba(255, 182, 193, 0.3);
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
 
 .writeButton:hover {
-  background-color: #ff9aad;
+  
+  background-color: #5c1782;
   color: white;
   transform: translateY(-2px);
 }
@@ -48,15 +46,15 @@
 .postItem {
   background-color: #ffffff;
   padding: 16px;
-  border-radius: 10px;
+  border-top:1px solid black;
+  border-bottom:1px solid black;
   width: 100%;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease;
   cursor: pointer;
 }
 
 .postItem:hover {
-  background-color: #faeef0;
+  background-color: #f6f5f5;
   transform: scale(1.02);
 }
 

@@ -1,15 +1,17 @@
 import axios from "axios";
 
-// Nginx가 /api 요청을 Spring Boot로 프록시
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL
+  baseURL: import.meta.env.VITE_API_BASE
+    ? `${import.meta.env.VITE_API_BASE}/api`
+    : "/api",
+  withCredentials: true,
 });
 
+export default api;
 
-export const fetchPosts = () => api.get("");
-export const fetchPostById = (id) => api.get(`/${id}`);
-export const createPost = (post) => api.post("", post);
-export const updatePost = (id, data) => api.put(`/${id}`, data);
-export const deletePost = (id) => api.delete(`/${id}`);
-export const checkPassword = (id, password) => api.post(`/${id}/check-password`, { password });
-
+export const fetchPosts = () => api.get("/inquiries");
+export const fetchPostById = (id) => api.get(`/inquiries/${id}`);
+export const createPost = (data) => api.post("/inquiries", data);
+export const updatePost = (id, data) => api.put(`/inquiries/${id}`, data);
+export const deletePost = (id) => api.delete(`/inquiries/${id}`);
+export const upsertReply = (id, body) => api.put(`/inquiries/${id}/reply`, body);

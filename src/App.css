@@ -72,20 +72,36 @@ html, body, #root, .wrap {
 }
 .header {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 12px;       
+  max-width: 1280px;
+  margin: 0 auto;
 }
+
 .nav {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
-  width: 100%;
-  line-height: 86px;
-  gap: 84px;
+  gap: 42px;                  
+  line-height: 1;            
+  flex: 1 1 auto;             
+  min-width: 0;              
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;       
 }
+
 .nav > li {
   list-style-type: none;
 }
 .nav > li > a {
+  display: inline-block;
+  padding: 18px 0;
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 1.0rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   transition: color 0.2s;
@@ -364,6 +380,117 @@ footer > div:last-child {
   }
 }
 
+/* ===== Header Auth UI ===== */
+.authBox {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex: 0 0 auto;           
+  min-width: 0;
+  flex-wrap: nowrap;        
+  white-space: nowrap;    
+}
+
+.authLoggedIn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;       
+  white-space: nowrap;
+}
+
+.authProfile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(6px);
+}
+
+.authAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 13px;
+  color: white;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.authName {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.authBtn {
+  border: none;
+  cursor: pointer;
+  padding: 9px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+  transition: transform 0.06s ease, opacity 0.15s ease, background 0.15s ease;
+}
+
+.authBtn:active {
+  transform: scale(0.98);
+}
+
+.authBtnKakao {
+  color: white;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.authBtnKakao:hover {
+  opacity: 0.92;
+}
+
+.authBtnGhost {
+  color: white;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.authBtnGhost:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.authBtnKakaoGhost {
+  background: #FEE500; 
+  color: #191919;
+  border: 1px solid rgba(25,25,25,0.12);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+}
+
+.authBtnKakaoGhost:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+.authBtnKakaoGhost:active {
+  transform: translateY(0px);
+  opacity: 0.92;
+}
+
+/* 로딩 느낌 (me 불러오는 중) */
+.authSkeleton {
+  width: 180px;
+  height: 36px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
 /* 모바일 이하 */
 @media (max-width: 480px) {
   .amount {
@@ -581,4 +708,38 @@ footer > div:last-child {
   }
   /*------*/
 
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 10px 8px;
+  }
+
+  /* nav*/
+  .nav {
+    gap: 18px;
+    overflow-x: auto;
+    scrollbar-width: none;     /* firefox */
+  }
+  .nav::-webkit-scrollbar { display: none; }
+
+  .nav > li > a {
+    font-size: 0.78rem;
+    padding: 14px 0;
+  }
+
+  /* auth 영역 */
+  .authProfile { padding: 6px 8px; }
+  .authAvatar { width: 26px; height: 26px; font-size: 12px; }
+  .authName { font-size: 12px; }
+  .authBtn { padding: 7px 9px; font-size: 11px; }
+}
+
+/* ===== 초소형 모바일 ===== */
+@media (max-width: 420px) {
+  .authName {
+    max-width: 72px;        
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

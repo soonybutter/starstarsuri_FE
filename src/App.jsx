@@ -8,6 +8,7 @@ import Home from "./pages/Home.jsx";
 import BoardDetail from "./pages/BoardDetail.jsx";
 import BoardWrite from "./pages/BoardWrite.jsx";
 import BoardEdit from "./pages/BoardEdit.jsx";
+import AdminInquiries from "./pages/AdminInquiries";
 
 const App = () => {
   return(
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/BoardDetail/:id" element={<BoardDetail/>}/>
           <Route path="/BoardWrite" element={<BoardWrite/>}/>
           <Route path="/edit/:id" element={<BoardEdit />} />
+          <Route path="/AdminInquiries" element={<AdminInquiries />} />
         </Routes>
       </Router>
     </div>

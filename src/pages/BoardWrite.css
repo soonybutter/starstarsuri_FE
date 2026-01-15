@@ -39,27 +39,12 @@
   font-family: inherit;
   font-weight: 500;
   color: #333;
-  background-color: #f9f9f9;
-  border: 1px solid #fae0e0;
+  border: 1px solid #e4e2e2;
   border-radius: 10px;
   transition:
     border-color 0.2s ease-in-out,
     background-color 0.2s ease-in-out,
     box-shadow 0 0 6px rgba(0, 0, 0, 0.06);
-}
-
-.board-write input:hover,
-.board-write textarea:hover {
-  border-color: #d2d1d1;
-  background-color: #fff;
-}
-
-.board-write input:focus,
-.board-write textarea:focus {
-  outline: none;
-  border-color: #ffdffc;
-  background-color: #fff;
-  box-shadow: 0 0 8px rgba(251, 221, 255, 0.815);
 }
 
 .board-write textarea {
@@ -91,22 +76,33 @@
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
 }
 
-.board-write button.submit {
-  background-color: #daeeff;
+.board-write button.submit,
+.board-write button.cancel {
+  background: transparent;                
   color: #333;
-}
-.board-write button.submit:hover {
-  background-color: #a3d0f5;
-  transform: translateY(-1px);
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
 }
 
-.board-write button.cancel {
-  background-color: #f9f0fa;
-  color: #333;
-}
-.board-write button.cancel:hover {
-  background-color: #ce9fd6;
+.board-write button.submit:hover {
+  background: rgba(163, 208, 245, 0.22);
   transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+}
+
+.board-write button.cancel:hover {
+  background: rgba(206, 159, 214, 0.18);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+}
+
+.board-write button.submit:active,
+.board-write button.cancel:active {
+  transform: translateY(0px);
+  box-shadow: none;
 }
 
 /* 반응형 미디어 쿼리 */
