@@ -1,65 +1,153 @@
-# 🌟 별별집수리 (StarStarSuri) — 업체 소개 및 문의 웹 서비스
+# 별별집수리
 
-## 📌 요약
-소상공인 홈페이지의 게시판/문의 기능을 제공하는 웹 서비스를 구현했습니다.  
+소상공인을 위한 무료 홍보 홈페이지로, 가게 소개와 고객 문의를 온라인에서 효율적으로 관리할 수 있도록 구현한 웹 서비스입니다.
 
-- **React(Vite) 기반의 반응형 UI** 
-- **Nginx 리버스 프록시:** 정적 파일 서빙과 /api 프록시를 구성
-- **CRUD :** 게시글/문의글 등록·조회·수정·삭제와 목록 페이징을 구현  
-- **React Router, Axios:** 클라이언트 라우팅과 API 통신을 구성  
-- **Nginx:** 정적 리소스 서빙과 백엔드 프록시를 분리
-- **프론트 우회 코드 제거** 
-- **운영 중 CORS 관련 4xx/5xx 무관측(5주+)**
-- **RTO ≤ 30분 유지**
+## 배포 및 저장소 링크
+- 서비스 주소: https://starstatsuri.site/
+- Backend Repository: https://github.com/soonybutter/starstarsuri_BE.git
+- Frontend Repository: https://github.com/soonybutter/starstarsuri_FE.git
+
+## 프로젝트 개요
+- 개발 기간: 2024.04 ~ 2024.07
+- 참여 인원: 1명
+- 담당 역할: 기획, 프론트엔드, 백엔드, 배포 전반 직접 수행
+
+## 기술 스택
+
+### Frontend
+- React
+- JavaScript
+- HTML/CSS
+
+### Backend
+- Java
+- Spring Boot
+- Spring Security OAuth2
+
+### Database
+- MySQL
+
+### Infra
+- AWS EC2 (Ubuntu)
+- Nginx (Reverse Proxy)
+
+### Tools
+- Spring Tool Suite (STS)
+- Visual Studio Code
+- Git
+- GitHub
+
+### External API
+- Kakao Login API
+
+## 시스템 아키텍처
+![아키텍처](/assets/images/arch.png)
+
+- React 프론트엔드와 Spring Boot 백엔드를 분리하여 구성했습니다.
+- Nginx Reverse Proxy를 통해 클라이언트 요청을 백엔드 서버로 전달하도록 구성했습니다.
+- 고객 문의 데이터는 MySQL에 저장되며, 관리자 계정은 카카오 로그인 기반으로 인증되도록 구현했습니다.
+
+## 주요 기능
+- 업체 소개 및 서비스 정보 제공
+- 고객 문의 등록 및 조회
+- 관리자 계정 기반 문의 답변 기능
+- 카카오 로그인 기반 인증
+- 배포 환경 구성 및 운영
+
+## 페이지별 화면 설명
+
+### 1) 메인 페이지
+![메인 페이지](/assets/images/main.png)
+
+- 기능: 업체 소개, 서비스 안내, 연락처 및 홍보 정보 제공
+- 구현 내용: 사용자가 필요한 정보를 한눈에 확인할 수 있도록 직관적인 화면 흐름으로 구성
+- 사용 기술: React, JavaScript, HTML/CSS
+
+### 2) 문의 게시판
+![문의 게시판](/assets/images/mmm.png)
+![문의 게시판](/assets/images/moone1.png)
 
 
-## 🤔 문제 / 해결 
-집수리업을 하시는 소상공인분께 도움을 드리자는 취지로 시작한 프로젝트입니다.  
-업체에 대한 정보전달, 고객들이 간편하게 문의를 남길 수 있도록 설계해야겠습니다. 
+- 기능: 고객 문의 등록 및 조회
+- 구현 내용: 문의 데이터를 DB에 저장하여 실제 운영 가능한 게시판 구조로 구현
+- 사용 기술: React, Spring Boot, MySQL
 
-- **사용자 친화적인 UI/UX**
-- **3계층(Controller–Service–Repository) :** 기반의 게시판 CRUD 설계
-- **Nginx 리버스 프록시:** 프론트/백엔드 분리 운영
-- **환경 분리와 시크릿 관리 습관화:** 배포 자동화에 대비
-- **Azure 스냅샷+스케줄:** 복구 체계 구축
+### 3) 관리자 답변 기능
+![관리자 페이지](/assets/images/sajang.png)
 
-## 🔨 기술
-- **Frontend**: React (Vite), React Router, Axios, CSS Modules(또는 styled-components)  
-- **Backend**: Java 17+, Spring Boot 3, Spring Data JPA, Spring Security, Gradle  
-- **DB/Infra**: MySQL, Azure VM, Nginx(Reverse Proxy)
+- 기능: 관리자 권한으로 고객 문의에 답변
+- 구현 내용: 사장님의 카카오 계정에 관리자 권한을 부여해 인증된 사용자만 답변 가능하도록 설계
+- 사용 기술: Spring Security OAuth2, Kakao Login API
 
-## 👪 팀원
-- **양다연 (Fullstack)**: 게시판/문의 도메인 및 CRUD, 페이징/검색, 프론트엔드 UI,\
- 배포·리버스 프록시 구성을 구현했습니다.
+## ERD
+![ERD](/assets/images/erd.png)
 
-## 📎 링크
-https://starstatsuri.site/
+- 문의 게시판 중심의 데이터 흐름을 반영해 사용자 문의와 관리자 답변 관계를 구성했습니다.
+- 세부 테이블 구조는 ERD를 통해 확인할 수 있습니다.
 
-## ⚙️ Setup 
+## 핵심 구현 포인트
+
+### 카카오 로그인 기반 관리자 인증
+- 별도의 회원가입 절차 없이 카카오 로그인으로 인증을 처리해 관리자 접근 편의성을 높였습니다.
+- 관리자 권한이 부여된 계정만 문의 답변 기능에 접근할 수 있도록 구성했습니다.
+
+### 문의 게시판 DB 저장 구조
+- 단순 정적 소개 페이지가 아니라, 고객 문의가 지속적으로 누적되고 관리될 수 있도록 DB 저장 구조를 적용했습니다.
+- 이를 통해 실제 운영 가능한 서비스 형태로 확장했습니다.
+
+### 운영을 고려한 배포 구조
+- AWS EC2와 Nginx Reverse Proxy를 활용해 프론트엔드와 백엔드를 분리 배포했습니다.
+- 실제 서비스 운영을 고려하여 도메인 기반 접근이 가능하도록 구성했습니다.
+
+## 트러블슈팅
+
+### 1) HikariCP 커넥션 풀 설정 최적화
+#### 문제 상황
+Spring Boot 애플리케이션에서 DB 연결을 위해 HikariCP 커넥션 풀을 사용하고 있었습니다.  
+기본 설정에서는 커넥션이 장시간 유지될 수 있어 불필요한 유휴 커넥션이 유지될 가능성이 있다고 판단했습니다.
+
+#### 원인 분석
+HikariCP 기본 설정에서는 커넥션의 유휴 시간과 최대 생존 시간이 비교적 길게 설정되어 있습니다.  
+트래픽이 많지 않은 환경에서는 사용되지 않는 유휴 커넥션이 장시간 유지될 수 있어 DB 리소스를 비효율적으로 사용할 가능성이 있었습니다.
+
+#### 해결 방법
+DB 커넥션을 효율적으로 관리하기 위해 HikariCP 설정을 검토했습니다.
+- `idleTimeout`: 10분
+- `maxLifetime`: 30분
+
+유휴 상태의 커넥션이 과도하게 유지되지 않도록 조정하고, 장시간 유지되는 커넥션으로 인한 문제 가능성을 줄이도록 설정했습니다.
+
+#### 결과
+유휴 커넥션을 적절히 정리하도록 설정하여 DB 리소스를 보다 안정적으로 관리할 수 있도록 구성했습니다.
+
+### 2) 작업 사례 페이지 이미지 로딩 성능 개선
+#### 문제 상황
+소상공인의 실제 작업 사례를 보여주는 페이지에서는 약 20장의 이미지가 한 페이지에서 로드되었습니다.  
+초기 페이지 진입 시 이미지가 동시에 로딩되면서 페이지의 Largest Contentful Paint(LCP) 시간이 길어지는 문제가 있었습니다.
+
+#### 원인 분석
+Chrome Lighthouse를 통해 측정한 결과 LCP 지표가 개선될 여지가 있었습니다.  
+또한 이미지 요청 시 브라우저 캐시가 활용되지 않아 재방문 시에도 이미지가 다시 다운로드되는 점을 확인했습니다.
+
+#### 해결 방법
+이미지 리소스에 Cache-Control 헤더를 적용해 브라우저 캐시를 활용하도록 구성했습니다.  
+이미지 리소스는 변경 가능성이 낮다고 판단해 `max-age`를 1년으로 설정했습니다.
+
+#### 결과
+- LCP 약 0.6s 수준의 빠른 렌더링 성능 유지
+- 불필요한 네트워크 요청 감소
+- 재방문 시 체감 로딩 속도 개선
+
+## 실행 방법
+
+### Backend
 ```bash
-# [Backend]
-# 1) Clone
 git clone https://github.com/soonybutter/starstarsuri_BE.git
 cd starstarsuri_BE
 
-# 2) 실행
-# 개발
+# 개발 실행
 ./gradlew bootRun --args="--spring.profiles.active=local"
 
-# 배포
+# 배포용 빌드 및 실행
 ./gradlew bootJar
 java -jar build/libs/*.jar --spring.profiles.active=prod
-
-# [Frontend]
-# 1) Clone
-git clone https://github.com/soonybutter/starstarsuri_FE.git
-cd starstarsuri_FE
-
-# 2) 패키지 설치
-npm install
-
-# 3) 환경 변수 설정 (.env)
-# VITE_API_BASE=http://localhost:8080    # 운영 시 서비스 도메인으로 교체
-
-# 4) 개발 서버 실행
-npm run dev
