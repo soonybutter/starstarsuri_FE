@@ -1,0 +1,116 @@
+.detail-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  font-family: "Noto Sans KR", sans-serif;
+  box-sizing: border-box;
+}
+.detail-title {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.detail-desc {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 50px;
+  color: #555;
+  line-height: 1.6;
+}
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+.portfolio-item {
+  background: #f9f9f9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.portfolio-item:hover { transform: translateY(10px); }
+.portfolio-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+.portfolio-caption { padding: 15px; text-align: center; }
+
+.modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(249, 249, 249, 0.7);
+  display: flex; justify-content: center; align-items: center; z-index: 1000;
+}
+.modal-content {
+  position: relative;
+  max-width: 98vw;
+  max-height: 95vh;
+  background: #fff;
+  padding: 6px;
+  border-radius: 10px;
+  overflow: auto;
+  box-sizing: border-box;
+}
+.modal-img {
+  display: block;
+  max-width: 100%;
+  max-height: 80vh;
+  margin: 0 auto;
+  object-fit: contain;
+  background: #f6f6f6;
+}
+.modal-close {
+  position: absolute; top: 0.2em; right: 1em;
+  background: rgba(255,255,255,0.8);
+  border: none;
+  font-size: 2rem;
+  color: #333;
+  cursor: pointer;
+  padding: 10px 16px;
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .detail-wrap { padding: 32px 8px; }
+  .detail-title { font-size: 2rem; }
+  .detail-desc { font-size: 1rem; }
+  .portfolio-grid { gap: 12px; }
+  .portfolio-img { aspect-ratio: 5/4; max-height: 200px;}
+}
+@media (max-width: 480px) {
+  .detail-wrap {
+    padding: 20px 2vw; 
+  }
+  .title-content {
+    margin-top: 50px;  
+  }
+  .detail-title {
+    font-size: 1.0rem;
+    margin-bottom: 10px;
+  }
+  .detail-desc {
+    font-size: 0.28rem;
+    margin-bottom: 18px;
+  }
+  .portfolio-grid {
+    gap: 40px;      
+    padding-bottom: 20px;
+  }
+  .portfolio-item {
+    min-width: 0;
+    max-width: 98vw;
+    padding-bottom: 10px;
+  }
+  .portfolio-img {
+    aspect-ratio: 5/4;
+    max-height: 115px;   
+  }
+  .portfolio-caption {
+    padding: 6px;
+    font-size: 0.68rem;
+  }
+}
